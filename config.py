@@ -1,3 +1,3 @@
 import os 
 
-TeleBot = os.environ.get("TeleBot", "")
+TOKEN = os.environ.get("TOKEN", "")
