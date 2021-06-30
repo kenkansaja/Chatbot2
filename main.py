@@ -31,8 +31,8 @@ class User:  # Класс для собирания данных и добавл
 user_dict = {}  # Словарь из пользователей
 
 
-@bot.on_message(commands=['start'])
-def welcome(
+@bot.on_message(commands=["start"])
+asyc def welcome(
         message):  # Стартовое меня, если вы не зарегистрированы, нгачнётся регистрация, иначе у вас будет выбор между действиями
     if check_user(user_id=message.from_user.id)[0]:
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
@@ -45,8 +45,8 @@ def welcome(
         bot.send_message(message.from_user.id, "➡️ *Nama Kamu :*", parse_mode="markdown")
         bot.register_next_step_handler(message, reg_name)
 
-@bot.on_message(content_types=['text'])
-def text_reac(message):  # реакция на любое сообщение, которое не является командой
+@bot.on_message(content_types=["text"])
+async def text_reac(message):  # реакция на любое сообщение, которое не является командой
     bot.send_message(message.chat.id, 'Tejadi Kesalahan\nSilahkan klik /start untuk mencoba lagi')
 
 def reg_name(message):  # Регистрация имени
