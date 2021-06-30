@@ -12,6 +12,7 @@ from db import check_companion
 from db import check_open
 from db import close_chat
 from db import edit_db
+import os
 import time
 import pytz
 from datetime import datetime
