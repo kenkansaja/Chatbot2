@@ -16,9 +16,7 @@ import os
 import time
 import pytz
 from datetime import datetime
-from config import TOKEN
-
-bot = TOKEN
+from config import TOKEN as bot
 
 
 class User:  # Класс для собирания данных и добавления в бд, пользователей
