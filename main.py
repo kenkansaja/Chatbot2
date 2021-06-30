@@ -12,11 +12,11 @@ from db import check_companion
 from db import check_open
 from db import close_chat
 from db import edit_db
-import os
 import time
 import pytz
 from datetime import datetime
-from config import TOKEN as bot
+
+bot = telebot.TeleBot('1802908816:AAE467ztJnk7UR0wLW8UQAP_yLbkYQJbAv4')
 
 
 class User:  # Класс для собирания данных и добавления в бд, пользователей
@@ -31,8 +31,8 @@ class User:  # Класс для собирания данных и добавл
 user_dict = {}  # Словарь из пользователей
 
 
-@bot.message(commands=["start"])
-async def welcome(
+@bot.message_handler(commands=['start'])
+def welcome(
         message):  # Стартовое меня, если вы не зарегистрированы, нгачнётся регистрация, иначе у вас будет выбор между действиями
     if check_user(user_id=message.from_user.id)[0]:
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
@@ -45,8 +45,8 @@ async def welcome(
         bot.send_message(message.from_user.id, "➡️ *Nama Kamu :*", parse_mode="markdown")
         bot.register_next_step_handler(message, reg_name)
 
-@bot.message(content_types=["text"])
-async def text_reac(message):  # реакция на любое сообщение, которое не является командой
+@bot.message_handler(content_types=['text'])
+def text_reac(message):  # реакция на любое сообщение, которое не является командой
     bot.send_message(message.chat.id, 'Tejadi Kesalahan\nSilahkan klik /start untuk mencoba lagi')
 
 def reg_name(message):  # Регистрация имени
