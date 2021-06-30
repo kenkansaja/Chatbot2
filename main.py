@@ -12,11 +12,13 @@ from db import check_companion
 from db import check_open
 from db import close_chat
 from db import edit_db
+import os
 import time
 import pytz
 from datetime import datetime
+from config import GROUP, OWNER, CHANNEL, BOT_NAME, TOKEN
 
-bot = telebot.TeleBot('1802908816:AAE467ztJnk7UR0wLW8UQAP_yLbkYQJbAv4')
+bot = telebot.TeleBot(f'{TOKEN}')
 
 
 class User:  # Класс для собирания данных и добавления в бд, пользователей
@@ -38,7 +40,7 @@ def welcome(
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
         mark.add('Cari Pasangan')
         mark.add('Info Profile', 'Hapus Profile')
-        bot.send_message(message.from_user.id, "*Selamat Bergabung Di Bot🙊*\n\n_Semoga Dapat teman atau jodoh, Dan selamat menunaikan ibadah puasa bagi yang menjalankan_\n\n*NOTE:*\nWAJIB JOIN [GRUP](t.me/caritemanh) > [CHANNEL](t.me/haluituenakkkk) DAN FOLLOW [INSTAGRAM](https://instagram.com/botmyboo2)",parse_mode="markdown",disable_web_page_preview=True, reply_markup=mark)
+        bot.send_message(message.from_user.id, f"*Selamat Bergabung Di {BOT_NAME}🙊*\n\n_Semoga Dapat teman atau jodoh_\n\n*NOTE:*\nWAJIB JOIN [💬 GRUP](t.me/{GROUP}) > [📣 CHANNEL](t.me/{CHANNEL}) DAN FOLLOW [👮OWNER](https://t.me/{OWNER})",parse_mode="markdown",disable_web_page_preview=True, reply_markup=mark)
         bot.register_next_step_handler(message, search_prof)
     else:
         bot.send_message(message.from_user.id, "_👋Halo Pengguna Baru, Untuk Melanjutkan Isi Biodata Berikut!_",parse_mode="markdown")
@@ -99,7 +101,7 @@ def reg_change(message):  # Регистрация выбора людей, ко
         bot.send_message(message.from_user.id,
                          "🐱 - _BIODATA KAMU_ - 🐱\n\n*=> Nama :* " + str(user.name) + "\n*=> Umur :* " + str(user.age)+" Tahun" + "\n*=> Jenis Kelamin :* " + str(user.sex) + "\n*=> Tipe Pasangan :* " + str(user.change)+ "\n*=> Tedaftar Pada :\n        >Tanggal :* "+str(date1[0])+"\n    *    >Waktu :* "+str(date1[1])+" WIB", parse_mode="markdown")
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-        markup.add('Iya✔️', 'Tidak✖️')
+        markup.add('Iya ✔️', 'Tidak ✖️')
         bot.send_message(message.from_user.id, "`Ingin Merubah Data diatas??`",parse_mode="markdown", reply_markup=markup)
         bot.register_next_step_handler(message, reg_accept)
     else:
@@ -108,8 +110,8 @@ def reg_change(message):  # Регистрация выбора людей, ко
 
 
 def reg_accept(message):  # Потверждение регистрации или замена старых данных на новых в бд
-    if (message.text == u'Iya✔️') or (message.text == u'Tidak✖️'):
-        if message.text == u'Iya✔️':
+    if (message.text == u'Iya ✔️') or (message.text == u'Tidak ✖️'):
+        if message.text == u'Iya ✔️':
             tw = types.ReplyKeyboardRemove()
             bot.send_message(message.from_user.id, "*Masukkan Kembali🕹\nNama Kamu :*", parse_mode="markdown", reply_markup=tw)
             bot.register_next_step_handler(message, reg_name)
@@ -137,7 +139,7 @@ def search_prof(message):  # Отображение профиля, с возм�
                              "📍Data Profile📍\n\n*Nama :* " + str(user_info[2]) +"\n*ID :* `"+str(message.from_user.id)+"`" +"\n*Umur :* " + str(
                                  user_info[3]) +" Tahun" + "\n*Jenis Kelamin :* " + str(user_info[4]) + "\n*Tipe Pasangan :* " + str(user_info[5]),parse_mode="markdown")
             mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-            mark.add('Iya✔️', 'Tidak✖️')
+            mark.add('Iya ✔️', 'Tidak ✖️')
             bot.send_message(message.from_user.id, '_Ingin Merubah Data Profil Kamu??_',parse_mode="markdown", reply_markup=mark)
             bot.register_next_step_handler(message, reg_accept)
         else:
