@@ -32,7 +32,7 @@ user_dict = {}  # Словарь из пользователей
 
 
 @bot.on_message(commands=["start"])
-asyc def welcome(
+async def welcome(
         message):  # Стартовое меня, если вы не зарегистрированы, нгачнётся регистрация, иначе у вас будет выбор между действиями
     if check_user(user_id=message.from_user.id)[0]:
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
