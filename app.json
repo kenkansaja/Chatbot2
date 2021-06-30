@@ -1,7 +1,7 @@
 {
   "name": "Chatbot",
   "description": "Bot anonymous chat.",
-  "repository": "https://github.com/kenkannih/Chatbot",
+  "repository": "https://github.com/kenkannih/Chatbot2",
   "logo": "https://telegra.ph/file/1354c3253eb2bf185d28f.jpg",
   "env": {
     "HEROKU_APP_NAME": {
