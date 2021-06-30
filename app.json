@@ -4,7 +4,7 @@
   "repository": "https://github.com/kenkannih/Chatbot2",
   "logo": "https://telegra.ph/file/1354c3253eb2bf185d28f.jpg",
   "env": {
-    "TeleBot": {
+    "TOKEN": {
       "description": "Dapatkan di @botfather",
       "value": ""
     },
