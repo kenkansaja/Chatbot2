@@ -9,7 +9,7 @@
 </p>  
 
 <p align="center">
-<img src="https://telegra.ph/file/1354c3253eb2bf185d28f.jpg">
+<img src="https://telegra.ph/file/de3e9d2a021c2ac516b12.jpg">
 <p>
 
 🇰 🇦 🇱 🇦 🇺   🇩 🇪 🇵 🇱 🇴 🇾  
