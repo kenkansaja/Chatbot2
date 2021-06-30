@@ -16,9 +16,9 @@ import os
 import time
 import pytz
 from datetime import datetime
-from config import TeleBot
+from config import TOKEN
 
-bot = telebot.TeleBot
+bot = TOKEN
 
 
 class User:  # Класс для собирания данных и добавления в бд, пользователей
