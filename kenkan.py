@@ -30,42 +30,15 @@ class User:  # Класс для собирания данных и добавл
         self.change = None
 
 
-user_dict = {}  # Словарь из пользователей
+user_dict = {} 
 
-# @kenkanasw
+# KEN KAN Akun telegram @kenkanasw
 
-	                if 'photo' in update:
-				photo = update['photo'][0]['file_id']
-				bot.sendPhoto(queue["occupied"][sel], photo, caption=captionphoto)
-                                
-			if 'video' in update:
-				video = update['video']['file_id']
-				bot.sendVideo(queue["occupied"][sel], video, caption=captionvideo)
-			
-			if 'document' in update:
-				document = update['document']['file_id']
-				bot.sendDocument(queue["occupied"][sel], document, caption=captionducument)
-				
-			if 'audio' in update:
-				audio = update['audio']['file_id']
-				bot.sendAudio(queue["occupied"][sel], audio, caption=captionaudio)
-				
-			if 'video_note' in update:
-				video_note = update['video_note']['file_id']
-				bot.sendVideoNote(queue["occupied"][sel], video_note)
-			        
-			if 'voice' in update:
-				voice = update['voice']['file_id']
-				bot.sendVoice(queue["occupied"][sel], voice, caption=captionvoice)
-                                
-			if 'sticker' in update:
-				sticker = update['sticker']['file_id']
-				bot.sendSticker(queue["occupied"][sel], sticker)
-
+	                
 
 @bot.message_handler(commands=['start'])
 def welcome(
-        message):  # Стартовое меня, если вы не зарегистрированы, нгачнётся регистрация, иначе у вас будет выбор между действиями
+        message):
     if check_user(user_id=message.from_user.id)[0]:
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
         mark.add('Cari Pasangan')
@@ -78,10 +51,10 @@ def welcome(
         bot.register_next_step_handler(message, reg_name)
 
 @bot.message_handler(content_types=['text'])
-def text_reac(message):  # реакция на любое сообщение, которое не является командой
+def text_reac(message):  
     bot.send_message(message.chat.id, 'Tejadi Kesalahan\nSilahkan klik /start untuk mencoba lagi')
 
-def reg_name(message):  # Регистрация имени
+def reg_name(message):  
     if message.text != '':
         user = User(message.from_user.id)
         user_dict[message.from_user.id] = user
@@ -94,7 +67,7 @@ def reg_name(message):  # Регистрация имени
         bot.register_next_step_handler(message, reg_name)
 
 
-def reg_age(message):  # Регистрация возраста
+def reg_age(message):  
     age = message.text
     if not age.isdigit():
         msg = bot.reply_to(message, '_Gunakan angka, Bukan Huruf!!_', parse_mode="markdown")
@@ -108,7 +81,7 @@ def reg_age(message):  # Регистрация возраста
     bot.register_next_step_handler(message, reg_sex)
 
 
-def reg_sex(message):  # Регистрация Пола
+def reg_sex(message):  
     sex = message.text
     user = user_dict[message.from_user.id]
     if (sex == u'Pria👦') or (sex == u'Wanita👩🏻'):
@@ -123,7 +96,7 @@ def reg_sex(message):  # Регистрация Пола
         bot.register_next_step_handler(message, reg_sex)
 
 
-def reg_change(message):  # Регистрация выбора людей, которых они ищут, по половому признаку
+def reg_change(message):   
     if (message.text == u'Pria👦') or (message.text == u'Wanita👩🏻') or (message.text == u'Pria dan Wanita👀'):
         user = user_dict[message.from_user.id]
         user.change = message.text
@@ -139,7 +112,7 @@ def reg_change(message):  # Регистрация выбора людей, ко
         bot.register_next_step_handler(message, reg_change)
 
 
-def reg_accept(message):  # Потверждение регистрации или замена старых данных на новых в бд
+def reg_accept(message):  
     if (message.text == u'Iya ✔️') or (message.text == u'Tidak ✖️'):
         if message.text == u'Iya ✔️':
             tw = types.ReplyKeyboardRemove()
@@ -157,8 +130,8 @@ def reg_accept(message):  # Потверждение регистрации ил
             welcome(message)
 
 
-def search_prof(message):  # Отображение профиля, с возможностью пересоздать профиль и инициализация поиска партнёра
-    if (message.text == u'Cari Pasangan') or (message.text == u'Info Profile') or (
+def search_prof(message):  
+        if (message.text == u'Cari Pasangan') or (message.text == u'Info Profile') or (
             message.text == u'Hapus Profile'):
         if message.text == u'Cari Pasangan':
             bot.send_message(message.from_user.id, '🚀 Sedang mencari pasangan untukmu . . .')
@@ -182,9 +155,9 @@ def search_prof(message):  # Отображение профиля, с возм�
         bot.register_next_step_handler(message, search_prof)
 
 
-def search_partner(message):  # Поиск партнёра, если парнёр найден, отоюражает данные о нём и начинается чатинг
-    is_open = check_open(first_id=message.from_user.id)
-    if is_open[0][0]:  # если уже имеется открытый чат, сразу переходит в чаттинг
+def search_partner(message):  
+   is_open = check_open(first_id=message.from_user.id)
+    if is_open[0][0]:  
         bot.register_next_step_handler(message, chat)
 
     else:
@@ -218,7 +191,7 @@ def search_partner(message):  # Поиск партнёра, если парнё
         else:
             bot.register_next_step_handler(message, chat)
 
-def chat(message):  # реализация чата, если полльзователь напишет "/exit" и разрывает соединение
+def chat(message):  
     if message.text == "❌ Exit" or message.text == "/exit":
         mark1 = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
         mark1.add('Cari Pasangan')
