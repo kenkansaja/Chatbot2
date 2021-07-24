@@ -133,10 +133,10 @@ def reg_accept(message):
 def search_prof(message):  
         if (message.text == u'Cari Pasangan') or (message.text == u'Info Profile') or (
             message.text == u'Hapus Profile'):
-        if message.text == u'Cari Pasangan':
+        if (message.text == u'Cari Pasangan'):
             bot.send_message(message.from_user.id, '🚀 Sedang mencari pasangan untukmu . . .')
             search_partner(message)
-        elif message.text == u'Info Profile':
+        elif (message.text == u'Info Profile'):
             user_info = get_info(user_id=message.from_user.id)
             bot.send_message(message.from_user.id,
                              "📍Data Profile📍\n\n*Umur :* " + str(user_info[3]) +" Tahun" + "\n*Jenis Kelamin :* " + str(user_info[4]) + "\n*Tipe Pasangan :* " + str(user_info[5]),parse_mode="markdown")
