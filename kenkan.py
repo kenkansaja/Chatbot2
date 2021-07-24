@@ -22,7 +22,7 @@ from config import GROUP, OWNER, CHANNEL, BOT_NAME, TOKEN
 bot = telebot.TeleBot(f'{TOKEN}')
 
 
-class User:  # Класс для собирания данных и добавления в бд, пользователей
+class User:  
     def __init__(self, user_id):
         self.user_id = user_id
         self.name = None
