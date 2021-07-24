@@ -16,12 +16,13 @@ import time
 import pytz
 from datetime import datetime
 from config import GROUP, OWNER, CHANNEL, BOT_NAME, TOKEN
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 
 bot = telebot.TeleBot(f'{TOKEN}')
 
 
-class User:  # Класс для собирания данных и добавления в бд, пользователей
+class User:  
     def __init__(self, user_id):
         self.user_id = user_id
         self.name = None
@@ -30,7 +31,7 @@ class User:  # Класс для собирания данных и добавл
         self.change = None
 
 
-user_dict = {}  # Словарь из пользователей
+user_dict = {}  
 
 
 @bot.message_handler(commands=['start'])
@@ -40,7 +41,18 @@ def welcome(
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
         mark.add('Cari Pasangan')
         mark.add('Info Profile', 'Hapus Profile')
-        bot.send_message(message.from_user.id, f"*Selamat Bergabung Di {BOT_NAME}🙊*\n\n_Semoga Dapat teman atau jodoh_\n\n*NOTE:*\nWAJIB JOIN [💬 GRUP](t.me/{GROUP})\n> [📣 CHANNEL](t.me/{CHANNEL}) \nDAN FOLLOW [👮OWNER](https://t.me/{OWNER})",parse_mode="markdown",disable_web_page_preview=True, reply_markup=mark)
+        bot.send_message(message.from_user.id, 
+               text=f"*Selamat Bergabung Di {BOT_NAME}🙊*\n\n_Semoga Dapat teman atau jodoh_\n\n*NOTE:*\nWAJIB JOIN",
+               reply_markup=InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton("👥 ᴏᴡɴᴇʀ", url=f"t.me/{OWNER}"),
+                                InlineKeyboardButton("💬 ɢʀᴏᴜᴘ", url=f"t.me/{GROUP}"),
+                                InlineKeyboardButton("💌 ᴄʜᴀɴɴᴇʟ", url=f"t.me/{CHANNEL}")
+                            ]
+                        ]
+                    )
+          )
         bot.register_next_step_handler(message, search_prof)
     else:
         bot.send_message(message.from_user.id, "_👋Halo Pengguna Baru, Untuk Melanjutkan Isi Biodata Berikut!_",parse_mode="markdown")
