@@ -12,16 +12,16 @@ from db import check_companion
 from db import check_open
 from db import close_chat
 from db import edit_db
-import os
 import time
 import pytz
 from datetime import datetime
 from config import GROUP, OWNER, CHANNEL, BOT_NAME, TOKEN
 
+
 bot = telebot.TeleBot(f'{TOKEN}')
 
 
-class User:  
+class User:  # Класс для собирания данных и добавления в бд, пользователей
     def __init__(self, user_id):
         self.user_id = user_id
         self.name = None
@@ -30,15 +30,12 @@ class User:
         self.change = None
 
 
-user_dict = {} 
+user_dict = {}  # Словарь из пользователей
 
-# KEN KAN Akun telegram @kenkanasw
-
-	                
 
 @bot.message_handler(commands=['start'])
 def welcome(
-        message):
+        message):  
     if check_user(user_id=message.from_user.id)[0]:
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
         mark.add('Cari Pasangan')
@@ -96,7 +93,7 @@ def reg_sex(message):
         bot.register_next_step_handler(message, reg_sex)
 
 
-def reg_change(message):   
+def reg_change(message):  
     if (message.text == u'Pria👦') or (message.text == u'Wanita👩🏻') or (message.text == u'Pria dan Wanita👀'):
         user = user_dict[message.from_user.id]
         user.change = message.text
@@ -104,7 +101,7 @@ def reg_change(message):
         bot.send_message(message.from_user.id,
                          "🐱 - _BIODATA KAMU_ - 🐱\n\n*=> Nama :* " + str(user.name) + "\n*=> Umur :* " + str(user.age)+" Tahun" + "\n*=> Jenis Kelamin :* " + str(user.sex) + "\n*=> Tipe Pasangan :* " + str(user.change)+ "\n*=> Tedaftar Pada :\n        >Tanggal :* "+str(date1[0])+"\n    *    >Waktu :* "+str(date1[1])+" WIB", parse_mode="markdown")
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-        markup.add('Iya ✔️', 'Tidak ✖️')
+        markup.add('Iya✔️', 'Tidak✖️')
         bot.send_message(message.from_user.id, "`Ingin Merubah Data diatas??`",parse_mode="markdown", reply_markup=markup)
         bot.register_next_step_handler(message, reg_accept)
     else:
@@ -113,8 +110,8 @@ def reg_change(message):
 
 
 def reg_accept(message):  
-    if (message.text == u'Iya ✔️') or (message.text == u'Tidak ✖️'):
-        if message.text == u'Iya ✔️':
+    if (message.text == u'Iya✔️') or (message.text == u'Tidak✖️'):
+        if message.text == u'Iya✔️':
             tw = types.ReplyKeyboardRemove()
             bot.send_message(message.from_user.id, "*Masukkan Kembali🕹\nNama Kamu :*", parse_mode="markdown", reply_markup=tw)
             bot.register_next_step_handler(message, reg_name)
@@ -131,7 +128,7 @@ def reg_accept(message):
 
 
 def search_prof(message):  
-        if (message.text == u'Cari Pasangan') or (message.text == u'Info Profile') or (
+    if (message.text == u'Cari Pasangan') or (message.text == u'Info Profile') or (
             message.text == u'Hapus Profile'):
         if message.text == u'Cari Pasangan':
             bot.send_message(message.from_user.id, '🚀 Sedang mencari pasangan untukmu . . .')
@@ -139,9 +136,10 @@ def search_prof(message):
         elif message.text == u'Info Profile':
             user_info = get_info(user_id=message.from_user.id)
             bot.send_message(message.from_user.id,
-                             "📍Data Profile📍\n\n*Umur :* " + str(user_info[3]) +" Tahun" + "\n*Jenis Kelamin :* " + str(user_info[4]) + "\n*Tipe Pasangan :* " + str(user_info[5]),parse_mode="markdown")
+                             "📍Data Profile📍\n\n*Nama :* " + str(user_info[2]) +"\n*ID :* `"+str(message.from_user.id)+"`" +"\n*Umur :* " + str(
+                                 user_info[3]) +" Tahun" + "\n*Jenis Kelamin :* " + str(user_info[4]) + "\n*Tipe Pasangan :* " + str(user_info[5]),parse_mode="markdown")
             mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-            mark.add('Iya ✔️', 'Tidak ✖️')
+            mark.add('Iya✔️', 'Tidak✖️')
             bot.send_message(message.from_user.id, '_Ingin Merubah Data Profil Kamu??_',parse_mode="markdown", reply_markup=mark)
             bot.register_next_step_handler(message, reg_accept)
         else:
@@ -155,8 +153,8 @@ def search_prof(message):
         bot.register_next_step_handler(message, search_prof)
 
 
-def search_partner(message):  
-   is_open = check_open(first_id=message.from_user.id)
+def search_partner(message):
+    is_open = check_open(first_id=message.from_user.id)
     if is_open[0][0]:  
         bot.register_next_step_handler(message, chat)
 
@@ -209,5 +207,5 @@ def chat(message):
     bot.send_message(companion, message.text)
     bot.register_next_step_handler(message, chat)
 
-print("BOT SUDAH AKTIF")
+print("Bot Running")
 bot.polling()
