@@ -36,7 +36,7 @@ user_dict = {}
 
 @bot.message_handler(commands=['start'])
 def welcome(message):  
-     await  bot.send_message(
+         bot.send_message(
          text=f"*Selamat Bergabung Di {BOT_NAME}🙊*\n\n_Semoga Dapat teman atau jodoh_\n\n*NOTE:*\nWAJIB JOIN", 
          parse_mode="markdown", 
          reply_markup=InlineKeyboardMarkup(
