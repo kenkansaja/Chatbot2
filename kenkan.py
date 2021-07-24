@@ -41,7 +41,7 @@ def welcome(
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
         mark.add('Cari Pasangan')
         mark.add('Info Profile', 'Hapus Profile')
-        bot.send_message(message.from_user.id, f"*Selamat Bergabung Di {BOT_NAME}🙊*\n\n_Semoga Dapat teman atau jodoh_\n\n*NOTE:*\nWAJIB JOIN\n[👥 ɢʀᴏᴜᴘ](t.me/{GROUP} | [ᴄʜᴀɴɴᴇʟ 📣](t.me/{CHANNEL}) | [📱ᴏᴡɴᴇʀ](t.me/{OWNER})",parse_mode="markdown, reply_markup=mark)
+        bot.send_message(message.from_user.id, f"*Selamat Bergabung Di {BOT_NAME}🙊*\n\n_Semoga Dapat teman atau jodoh_\n\n*NOTE:*\nWAJIB JOIN\n[👥 ɢʀᴏᴜᴘ](t.me/{GROUP}\n[ᴄʜᴀɴɴᴇʟ 📣](t.me/{CHANNEL})\n[📱ᴏᴡɴᴇʀ](t.me/{OWNER})",parse_mode="markdown, reply_markup=mark)
         bot.register_next_step_handler(message, search_prof)
     else:
         bot.send_message(message.from_user.id, "_👋Halo Pengguna Baru, Untuk Melanjutkan Isi Biodata Berikut!_",parse_mode="markdown")
