@@ -110,7 +110,7 @@ def reg_change(message):  # Регистрация выбора людей, ко
         bot.register_next_step_handler(message, reg_change)
 
 
-def reg_accept(message):  # Потверждение регистрации или замена старых данных на новых в бд
+def reg_accept(message):  
     if (message.text == u'Iya ✔️') or (message.text == u'Tidak ✖️'):
         if message.text == u'Iya ✔️':
             tw = types.ReplyKeyboardRemove()
@@ -178,10 +178,10 @@ def search_partner(message):  # Поиск партнёра, если парнё
                     add_second_user(first_id=sel[0], second_id=message.from_user.id)
                     user_info = get_info(user_id=sel[0])
                     bot.send_message(message.from_user.id,
-                                     "⚠️*Pasangan Di Temukan*⚠️\n\n*Nama :* " + str(user_info[2]) + "\n*Umur :* " + str(user_info[3])+" Tahun" + "\n*Jenis Kelamin :* " + str(user_info[4]),parse_mode="markdown", reply_markup=mark2)
+                                     "⚠️*Pasangan Di Temukan*⚠️\n\n*Umur :* " + str(user_info[3])+" Tahun" + "\n*Jenis Kelamin :* " + str(user_info[4]),parse_mode="markdown", reply_markup=mark2)
                     user_info = get_info(user_id=message.from_user.id)
                     bot.send_message(sel[0],
-                                     "⚠️*Pasangan Di Temukan*⚠️\n\n*Nama :* " + str(user_info[2]) + "\n*Umur :* " + str(user_info[3])+" Tahun" + "\n*Jenis Kelamin :* " + str(user_info[4]),parse_mode="markdown", reply_markup=mark2)
+                                     "⚠️*Pasangan Di Temukan*⚠️\n\n*Umur :* " + str(user_info[3])+" Tahun" + "\n*Jenis Kelamin :* " + str(user_info[4]),parse_mode="markdown", reply_markup=mark2)
                     success = True
                     break
         if not success:
