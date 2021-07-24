@@ -35,16 +35,11 @@ user_dict = {}
 
 
 @bot.message_handler(commands=['start'])
-def welcome(
-        message):  
-    if check_user(user_id=message.from_user.id)[0]:
-        mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-        mark.add('Cari Pasangan')
-        mark.add('Info Profile', 'Hapus Profile')
-        bot.send_message(message.from_user.id, 
-               text=f"*Selamat Bergabung Di {BOT_NAME}🙊*\n\n_Semoga Dapat teman atau jodoh_\n\n*NOTE:*\nWAJIB JOIN", 
-               parse_mode="markdown", 
-               reply_markup=InlineKeyboardMarkup(
+def welcome(message):  
+     await  bot.send_message(
+         text=f"*Selamat Bergabung Di {BOT_NAME}🙊*\n\n_Semoga Dapat teman atau jodoh_\n\n*NOTE:*\nWAJIB JOIN", 
+         parse_mode="markdown", 
+         reply_markup=InlineKeyboardMarkup(
                         [
                             [
                                 InlineKeyboardButton("👥 ᴏᴡɴᴇʀ", url=f"t.me/{OWNER}"),
@@ -54,7 +49,7 @@ def welcome(
                         ]
                     )
           )
-        bot.register_next_step_handler(message, search_prof)
+        bot.register_next_step_handler(message, reg_name)
     else:
         bot.send_message(message.from_user.id, "_👋Halo Pengguna Baru, Untuk Melanjutkan Isi Biodata Berikut!_",parse_mode="markdown")
         bot.send_message(message.from_user.id, "➡️ *Nama Kamu :*", parse_mode="markdown")
@@ -133,6 +128,7 @@ def reg_accept(message):
                 user = user_dict[message.from_user.id]
                 reg_db(user_id=user.user_id, name=user.name, old=user.age, gender=user.sex, change=user.change)
                 bot.send_message(message.from_user.id, "_Berhasil...✅\nAccount Kamu Telah Terdaftar!_", parse_mode="markdown")
+                bot.register_next_step_handler(message, search_prof)
             else:
                 if message.from_user.id in user_dict.keys():
                     user = user_dict[message.from_user.id]
