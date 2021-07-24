@@ -41,7 +41,8 @@ def welcome(
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
         mark.add('Cari Pasangan')
         mark.add('Info Profile', 'Hapus Profile')
-        bot.send_message(message.from_user.id, f"*Selamat Bergabung Di {BOT_NAME}🙊*\n\n_Semoga Dapat teman atau jodoh_\n\n*NOTE:*\nWAJIB JOIN",parse_mode="markdown",disable_web_page_preview=True,keyboard=reply_markup=InlineKeyboardMarkup(
+        bot.send_message(message.from_user.id, f"*Selamat Bergabung Di {BOT_NAME}🙊*\n\n_Semoga Dapat teman atau jodoh_\n\n*NOTE:*\nWAJIB JOIN",parse_mode="markdown",disable_web_page_preview=True,
+        keyboard=InlineKeyboardMarkup(
                         [
                             [
                                 InlineKeyboardButton("👥 ᴏᴡɴᴇʀ", url=f"t.me/{OWNER}"),
