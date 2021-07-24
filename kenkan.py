@@ -37,8 +37,8 @@ user_dict = {}
 def welcome(message):
     if check_user(user_id=message.from_user.id)[0]:
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-        mark.add('Cari Pasangan')
-        mark.add('Info Profile', 'Hapus Profile')
+        mark.add('🔍 Cari Pasangan')
+        mark.add('📰 Info Profile', '🗑 Hapus Profile')
         bot.send_message(message.from_user.id, f"*Selamat Bergabung Di {BOT_NAME}🙊*\n\n_Semoga Dapat teman atau jodoh_\n\n*NOTE:*\nWAJIB JOIN\n[👥 ɢʀᴏᴜᴘ](t.me/{GROUP}) | [ᴄʜᴀɴɴᴇʟ 📣](t.me/{CHANNEL}) | [📱ᴏᴡɴᴇʀ](t.me/{OWNER})",parse_mode="markdown",disable_web_page_preview=True, reply_markup=mark)
         bot.register_next_step_handler(message, search_prof)
     else:
@@ -84,7 +84,7 @@ def reg_sex(message):
         user.sex = sex
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
         mark.add('Pria👦', 'Wanita👩🏻', 'Pria dan Wanita👀')
-        bot.send_message(message.from_user.id, '*Kamu ingin mencari pasangan :*',parse_mode="markdown", reply_markup=mark)
+        bot.send_message(message.from_user.id, '*Kamu ingin men🔍 Cari Pasangan :*',parse_mode="markdown", reply_markup=mark)
         bot.register_next_step_handler(message, reg_change)
 
     else:
@@ -127,12 +127,12 @@ def reg_accept(message):
 
 
 def search_prof(message):  
-    if (message.text == u'Cari Pasangan') or (message.text == u'Info Profile') or (
-            message.text == u'Hapus Profile'):
-        if message.text == u'Cari Pasangan':
-            bot.send_message(message.from_user.id, '🚀 Sedang mencari pasangan untukmu . . .')
+    if (message.text == u'🔍 Cari Pasangan') or (message.text == u'📰 Info Profile') or (
+            message.text == u'🗑 Hapus Profile'):
+        if message.text == u'🔍 Cari Pasangan':
+            bot.send_message(message.from_user.id, '🚀 Sedang men🔍 Cari Pasangan untukmu . . .')
             search_partner(message)
-        elif message.text == u'Info Profile':
+        elif message.text == u'📰 Info Profile':
             user_info = get_info(user_id=message.from_user.id)
             bot.send_message(message.from_user.id,
                              "📍Data Profile📍\n\n*Nama :* " + str(user_info[2]) +"\n*ID :* `"+str(message.from_user.id)+"`" +"\n*Umur :* " + str(
@@ -144,7 +144,7 @@ def search_prof(message):
         else:
             delete_user(user_id=message.from_user.id)
             tw = types.ReplyKeyboardRemove()
-            bot.send_message(message.from_user.id, '_Tunggu Sebentar..Sedang Menghapus Profile❗️_', parse_mode="markdown")
+            bot.send_message(message.from_user.id, '_Tunggu Sebentar..Sedang MengHapus Profile❗️_', parse_mode="markdown")
             bot.send_message(message.from_user.id, '_Berhasil..Profile Kamu Di Hapus✅_', parse_mode="markdown", reply_markup=tw)
             welcome(message)
     else:
@@ -191,8 +191,8 @@ def search_partner(message):
 def chat(message):  
     if message.text == "❌ Exit" or message.text == "/exit":
         mark1 = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-        mark1.add('Cari Pasangan')
-        mark1.add('Info Profile', 'Hapus Profile')
+        mark1.add('🔍 Cari Pasangan')
+        mark1.add('📰 Info Profile', '🗑 Hapus Profile')
         companion = check_companion(first_id=message.from_user.id)
         bot.send_message(message.from_user.id, "_Kamu Meninggalkan Obrolan_",parse_mode="markdown", reply_markup=mark1)
         bot.send_message(companion, "_Pasangan kamu Meninggalkan Percakapan_", parse_mode="markdown", reply_markup=mark1)
@@ -206,5 +206,5 @@ def chat(message):
     bot.send_message(companion, message.text)
     bot.register_next_step_handler(message, chat)
 
-print("Bot Running")
+print("BOT SUDAH SIAP")
 bot.polling()
