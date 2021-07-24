@@ -205,7 +205,7 @@ def chat(message):
         welcome(message)
         return
     companion = check_companion(first_id=message.from_user.id)
-    bot.send_message(companion, message, chat)
+    bot.send_message(companion, message.text)
     bot.register_next_step_handler(message, chat)
 
 print("BOT SUDAH AKTIF")
