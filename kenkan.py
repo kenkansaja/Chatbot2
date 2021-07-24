@@ -50,8 +50,7 @@ def welcome(
                                 InlineKeyboardButton("💌 ᴄʜᴀɴɴᴇʟ", url=f"t.me/{CHANNEL}")
                             ]
                         ]
-                    )
-          ),
+                    ),
         reply_markup=mark)
         bot.register_next_step_handler(message, search_prof)
     else:
