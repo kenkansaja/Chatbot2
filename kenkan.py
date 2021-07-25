@@ -84,7 +84,7 @@ def reg_sex(message):
         user.sex = sex
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
         mark.add('Pria👦', 'Wanita👩🏻', 'Pria dan Wanita👀')
-        bot.send_message(message.from_user.id, '*Kamu ingin men🔍 Cari Pasangan :*',parse_mode="markdown", reply_markup=mark)
+        bot.send_message(message.from_user.id, '*Kamu ingin 🔍 mencari pasangan :*',parse_mode="markdown", reply_markup=mark)
         bot.register_next_step_handler(message, reg_change)
 
     else:
@@ -130,7 +130,7 @@ def search_prof(message):
     if (message.text == u'🔍 Cari Pasangan') or (message.text == u'📰 Info Profile') or (
             message.text == u'🗑 Hapus Profile'):
         if message.text == u'🔍 Cari Pasangan':
-            bot.send_message(message.from_user.id, '🚀 Sedang men🔍 Cari Pasangan untukmu . . .')
+            bot.send_message(message.from_user.id, '🚀 Sedang mencari pasangan untukmu . . .')
             search_partner(message)
         elif message.text == u'📰 Info Profile':
             user_info = get_info(user_id=message.from_user.id)
