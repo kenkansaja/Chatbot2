@@ -46,7 +46,7 @@ def welcome(message):
         bot.send_message(message.from_user.id, "➡️ *Nama Kamu :*", parse_mode="markdown")
         bot.register_next_step_handler(message, reg_name)
 
-@bot.message_handler(content_types=['text', 'photo', 'video', 'document', 'audio', 'video_note', 'voice', 'sticker', 'contact'])
+@bot.message_handler(content_types=['text'])
 def text_reac(message):  
     bot.send_message(message.chat.id, 'Tejadi Kesalahan\nSilahkan klik /start untuk mencoba lagi')
 
