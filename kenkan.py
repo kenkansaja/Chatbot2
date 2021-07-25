@@ -84,7 +84,7 @@ def reg_sex(message):
         user.sex = sex
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
         mark.add('Pria👦', 'Wanita👩🏻', 'Pria dan Wanita👀')
-        bot.send_message(message.from_user.id, '*Kamu ingin 🔍 mencari pasangan :*',parse_mode="markdown", reply_markup=mark)
+        bot.send_message(message.from_user.id, '*⏳Kamu ingin mencari pasangan :*',parse_mode="markdown", reply_markup=mark)
         bot.register_next_step_handler(message, reg_change)
 
     else:
@@ -144,7 +144,7 @@ def search_prof(message):
         else:
             delete_user(user_id=message.from_user.id)
             tw = types.ReplyKeyboardRemove()
-            bot.send_message(message.from_user.id, '_Tunggu Sebentar..Sedang MengHapus Profile❗️_', parse_mode="markdown")
+            bot.send_message(message.from_user.id, '_Tunggu Sebentar..Sedang Menghapus Profile❗️_', parse_mode="markdown")
             bot.send_message(message.from_user.id, '_Berhasil..Profile Kamu Di Hapus✅_', parse_mode="markdown", reply_markup=tw)
             welcome(message)
     else:
