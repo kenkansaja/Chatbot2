@@ -36,3 +36,7 @@ Ini adalah repo untuk random chat bot atau biasa di kenal sebagai Anonymous Chat
 * [KEN KAN](https://github.com/kenkannih/Chatbot2) - Chatbot
 
 KEKURANGAN BELUM SUPPORT STICKERS DAN MEDIA
+
+## REPO TERBARU
+
+[ANON-BOT](https://github.com/kenkansaja/TelegramChat)
