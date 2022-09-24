@@ -190,76 +190,62 @@ def chat(message):
         welcome(message)
         return
 
-@bot.message_handler(
-    content_types=["text", "sticker", "video", "photo", "audio", "voice"]
-)
-def echo(message):
-    """
-    Resend message to anonymous friend.
-    :param message:
-    :return:
-    """
-    user_id = message.from_user.id
-    companion = check_companion(first_id=user_id)
-    if message.content_type == "sticker":
-        if not check_companion(user_id):
-            return
-        
-        bot.send_sticker(companion, message.sticker.file_id)
-    elif message.content_type == "photo":
-        if not check_companion(user_id):
-            return
-
+    if message.sticker:
+        bot.send_sticker(
+                    companion, 
+                    message.sticker.file_id
+                )
+    elif message.photo:
         file_id = None
-
+        
         for item in message.photo:
             file_id = item.file_id
-
         bot.send_photo(
-            companion, file_id, caption=message.caption
-        )
-    elif message.content_type == "audio":
-        if not check_companion(user_id):
-            return
-
-        bot.send_audio(
-            companion,
-            message.audio.file_id,
-            caption=message.caption,
-        )
-    elif message.content_type == "video":
-        if not check_companion(user_id):
-            return
-
+                    companion, file_id, 
+                    caption=message.caption
+                )
+    elif message.video:
         bot.send_video(
-            companion,
-            message.video.file_id,
-            caption=message.caption,
-        )
-    elif message.content_type == "voice":
-        if not check_companion(user_id):
-            return
-
-        bot.send_voice(companion, message.voice.file_id)
-    elif message.content_type == "text":
+                    companion,
+                    message.video.file_id,
+                    caption=message.caption,
+                )
+    elif message.audio:
+        bot.send_audio(
+                    companion,
+                    message.audio.file_id,
+                    caption=message.caption,
+                )
+    elif message.voice:
+        bot.send_voice(
+                    companion, 
+                    message.voice.file_id
+                )
+    elif message.animation:
+        bot.send_animation(
+                    companion, 
+                    message.animation.file_id
+                )
+    elif message.text:
         if (
             message.text != "/start"
             and message.text != "/exit"
         ):
-
-            if not check_companion(user_id):
-                return
-
             if message.reply_to_message is None:
                 bot.send_message(companion, message.text)
+
             elif message.from_user.id != message.reply_to_message.from_user.id:
                 bot.send_message(
-                    companion,
-                    message.text,
-                    reply_to_message_id=message.reply_to_message.message_id - 1,
-                )
+                            companion,
+                            message.text,
+                            reply_to_message_id=message.reply_to_message.message_id - 1,
+                           )
             else:
-                bot.send_message(user_id, "Anda tidak bisa membalas ke pesan anda sendiri")
+                bot.send_message(message.chat.id, "Anda tidak bisa membalas ke pesan anda sendiri")
+
+    bot.register_next_step_handler(message, chat)
+
+           
 
 print("BOT SUDAH SIAP")
 bot.polling()
