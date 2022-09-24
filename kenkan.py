@@ -195,8 +195,22 @@ def chat(message):
     companion = check_companion(first_id=message.from_user.id)
     if message.text:
         bot.send_message(companion, message.text)
-    else:
-        bot.copy_message(companion, message.id)
+    if message.photo:
+        bot.send_photo(companion, message.photo)
+    if message.video:
+        bot.send_video(companion, message.video)
+    if message.audio:
+        bot.send_audio(companion, message.audio)
+    if message.voice:
+        bot.send_voice(companion, message.voice)
+    if message.document:
+        bot.send_document(companion, message.document)
+    if message.animation:
+        bot.send_animation(companion, message.animation)
+    if message.sticker:
+        bot.send_sticker(companion, message.sticker)
+    if message.contact:
+        bot.send_contact(companion, message.contact)
     bot.register_next_step_handler(message, chat)
 
 print("BOT SUDAH SIAP")
