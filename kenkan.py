@@ -195,9 +195,8 @@ def chat(message):
     companion = check_companion(first_id=message.from_user.id)
     if message.text:
         bot.send_message(companion, message.text)
-        message.copy(companion)
     else:
-        message.copy(companion)
+        bot.copy_message(companion, message.id)
     bot.register_next_step_handler(message, chat)
 
 print("BOT SUDAH SIAP")
