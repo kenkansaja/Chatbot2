@@ -175,11 +175,11 @@ def search_partner(message):
                     add_second_user(first_id=sel[0], second_id=message.from_user.id)
                     user_info = get_info(user_id=sel[0])
                     bot.send_message(message.from_user.id,
-                          "⚠️*Pasangan Di Temukan*",
+                          "⚠️*Pasangan Di Temukan*", parse_mode="markdown",
                           reply_markup=mark2)
                     user_info = get_info(user_id=message.from_user.id)
                     bot.send_message(sel[0],
-                          "⚠️*Pasangan Di Temukan*",
+                          "⚠️*Pasangan Di Temukan*", parse_mode="markdown",
                           reply_markup=mark2)
                     success = True
                     break
