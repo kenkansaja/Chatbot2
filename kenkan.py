@@ -196,21 +196,21 @@ def chat(message):
     if message.text:
         bot.send_message(companion, message.text)
     if message.photo:
-        bot.send_photo(companion, message.photo)
+        bot.send_photo(companion, message.photo.file_id)
     if message.video:
-        bot.send_video(companion, message.video)
+        bot.send_video(companion, message.video.file_id)
     if message.audio:
-        bot.send_audio(companion, message.audio)
+        bot.send_audio(companion, message.audio.file_id)
     if message.voice:
-        bot.send_voice(companion, message.voice)
+        bot.send_voice(companion, message.voice.file_id)
     if message.document:
-        bot.send_document(companion, message.document)
+        bot.send_document(companion, message.document.file_id)
     if message.animation:
-        bot.send_animation(companion, message.animation)
+        bot.send_animation(companion, message.animation.file_id)
     if message.sticker:
-        bot.send_sticker(companion, message.sticker)
+        bot.send_sticker(companion, message.sticker.file_id)
     if message.contact:
-        bot.send_contact(companion, message.contact)
+        bot.send_contact(companion, message.contact.file_id)
     bot.register_next_step_handler(message, chat)
 
 print("BOT SUDAH SIAP")
