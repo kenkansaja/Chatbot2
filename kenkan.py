@@ -193,8 +193,7 @@ def chat(message):
         welcome(message)
         return
     companion = check_companion(first_id=message.from_user.id)
-    bot.copy_message(message.from_user.id, companion, message.id)
-    bot.register_next_step_handler(message, chat)
+    bot.copy_message(companion, message_id=message.id)
 
 print("BOT SUDAH SIAP")
 bot.polling()
