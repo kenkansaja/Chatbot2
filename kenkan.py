@@ -1,6 +1,6 @@
 import telebot
 from telebot import types
-from db import *
+from database import *
 import os
 import time
 import pytz
