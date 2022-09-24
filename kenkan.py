@@ -190,6 +190,10 @@ def chat(message):
         welcome(message)
         return
 
+    elif not check_open(first_id=message.from_user.id)[0][0]:
+        welcome(message)
+        return
+    companion = check_companion(first_id=message.from_user.id)
     if message.sticker:
         bot.send_sticker(
                     companion, 
