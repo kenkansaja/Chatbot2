@@ -189,11 +189,77 @@ def chat(message):
         close_chat(first_id=message.from_user.id)
         welcome(message)
         return
-    elif not check_open(first_id=message.from_user.id)[0][0]:
-        welcome(message)
-        return
-    companion = check_companion(first_id=message.from_user.id)
-    bot.copy_message(message.chat.id, companion, message_id=message.id)
+
+@bot.message_handler(
+    content_types=["text", "sticker", "video", "photo", "audio", "voice"]
+)
+def echo(message):
+    """
+    Resend message to anonymous friend.
+    :param message:
+    :return:
+    """
+    user_id = message.from_user.id
+    companion = check_companion(first_id=user_id)
+    if message.content_type == "sticker":
+        if not check_companion(user_id):
+            return
+        
+        bot.send_sticker(companion, message.sticker.file_id)
+    elif message.content_type == "photo":
+        if not check_companion(user_id):
+            return
+
+        file_id = None
+
+        for item in message.photo:
+            file_id = item.file_id
+
+        bot.send_photo(
+            companion, file_id, caption=message.caption
+        )
+    elif message.content_type == "audio":
+        if not check_companion(user_id):
+            return
+
+        bot.send_audio(
+            companion,
+            message.audio.file_id,
+            caption=message.caption,
+        )
+    elif message.content_type == "video":
+        if not check_companion(user_id):
+            return
+
+        bot.send_video(
+            companion,
+            message.video.file_id,
+            caption=message.caption,
+        )
+    elif message.content_type == "voice":
+        if not check_companion(user_id):
+            return
+
+        bot.send_voice(companion, message.voice.file_id)
+    elif message.content_type == "text":
+        if (
+            message.text != "/start"
+            and message.text != "/exit"
+        ):
+
+            if not check_companion(user_id):
+                return
+
+            if message.reply_to_message is None:
+                bot.send_message(companion, message.text)
+            elif message.from_user.id != message.reply_to_message.from_user.id:
+                bot.send_message(
+                    companion,
+                    message.text,
+                    reply_to_message_id=message.reply_to_message.message_id - 1,
+                )
+            else:
+                bot.send_message(user_id, "Anda tidak bisa membalas ke pesan anda sendiri")
 
 print("BOT SUDAH SIAP")
 bot.polling()
