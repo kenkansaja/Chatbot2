@@ -1,3 +1,12 @@
+# Copyright (C) 2020-2021 by kenkansaja@Github, < https://github.com/kenkansaja >.
+#
+# This file is part of < https://github.com/kenkansaja/Chatbot2 > project,
+# and is released under the "GNU v3.0 License Agreement".
+# Please see < https://github.com/kenkansaja/Chatbot2/blob/master/LICENSE >
+# https://t.me/pySmartDL
+#
+# All rights reserved.
+
 import telebot
 from telebot import types
 from database import *
@@ -166,10 +175,12 @@ def search_partner(message):
                     add_second_user(first_id=sel[0], second_id=message.from_user.id)
                     user_info = get_info(user_id=sel[0])
                     bot.send_message(message.from_user.id,
-                                     "⚠️*Pasangan Di Temukan*⚠️\n\n*Umur :* " + str(user_info[3])+" Tahun" + "\n*Jenis Kelamin :* " + str(user_info[4]),parse_mode="markdown", reply_markup=mark2)
+                          "⚠️*Pasangan Di Temukan*",
+                          reply_markup=mark2)
                     user_info = get_info(user_id=message.from_user.id)
                     bot.send_message(sel[0],
-                                     "⚠️*Pasangan Di Temukan*⚠️\n\n*Umur :* " + str(user_info[3])+" Tahun" + "\n*Jenis Kelamin :* " + str(user_info[4]),parse_mode="markdown", reply_markup=mark2)
+                          "⚠️*Pasangan Di Temukan*",
+                          reply_markup=mark2)
                     success = True
                     break
         if not success:
