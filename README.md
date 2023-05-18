@@ -34,3 +34,6 @@ Ini adalah repo untuk random chat bot atau biasa di kenal sebagai Anonymous Chat
 
 ## CREDIT
 * [KEN KAN](https://github.com/kenkansaja/Chatbot2) - Chatbot
+  
+## Bot Anon
+  [Anonymous Chat](t.me/Chatduabot) - Sumber kode di jual bagi yang minat hubungi [@pySmartDL](t.me/pySmartDL)
